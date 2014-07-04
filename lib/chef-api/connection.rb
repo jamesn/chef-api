@@ -403,7 +403,7 @@ module ChefAPI
       when /json/
         log.debug "Detected response as JSON"
         log.debug "Parsing response body as JSON"
-        JSON.parse(response.body)
+        JSON.parse(response.body, :create_additions => false, :create_id => nil)
       else
         log.debug "Detected response as text/plain"
         response.body
@@ -424,7 +424,7 @@ module ChefAPI
       when /json/
         log.debug "Detected error response as JSON"
         log.debug "Parsing error response as JSON"
-        message = Array(JSON.parse(response.body)['error']).join(', ')
+        message = Array(JSON.parse(response.body, :create_additions => false, :create_id => nil)['error']).join(', ')
       else
         log.debug "Detected response as text/plain"
         message = response.body

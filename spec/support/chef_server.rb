@@ -65,14 +65,14 @@ module RSpec
             data[:name] ||= name
 
             # Convert it to JSON
-            data = JSON.fast_generate(data)
+            data = JSON.fast_generate(data, :create_additions => false, :create_id => nil)
 
             load_data(name, '#{key}', data)
           end
 
           def #{method}(name)
             data = get('#{key}', name)
-            JSON.parse(data)
+            JSON.parse(data, :create_additions => false, :create_id => nil)
           rescue ChefZero::DataStore::DataNotFoundError
             nil
           end

@@ -10,7 +10,7 @@ module ChefAPI
     class << self
       def from_file(path, bag = File.basename(File.dirname(path)))
         id, contents = Util.safe_read(path)
-        data = JSON.parse(contents)
+        data = JSON.parse(contents, :create_additions => false, :create_id => nil)
         data[:id] = id
 
         bag = bag.is_a?(Resource::DataBag) ? bag : Resource::DataBag.new(name: bag)

@@ -928,7 +928,7 @@ module ChefAPI
     # @return [String]
     #
     def to_json
-      JSON.fast_generate(to_hash)
+      JSON.fast_generate(to_hash, :create_additions => false, :create_id => nil)
     end
 
     #
